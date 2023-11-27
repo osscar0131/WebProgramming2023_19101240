@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>_Create</title>
+	<style type="text/css">
+		body {
+			background-color: #eeeeee;
+		}
+		img {
+			width: 600px;
+		}
+		textarea {
+			padding: 10px;
+			width: 600px;
+			height: 500px;
+			max-width: 100%;
+		}
+	</style>
+	<script type="text/javascript">
+		function previewImage(event) {
+			const imageFiles = event.target.files;
+			if (imageFiles.length > 0) {
+				const imageSrc = URL.createObjectURL(imageFiles[0]);
+
+				image_preview = document.getElementById("image_preview");
+				image_preview.src = imageSrc;
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<h1>Create custom modding</h1>
+	<form method="post">
+		<div class="image-preview-container">
+			<div class="preview">
+				<img id="image_preview" src="default.png">
+			</div>
+			<label for="image_upload">Modding preview:</label>
+			<input type="file" id="image_upload" name="preview" accept="image/png, image/jpeg" onchange="previewImage(event);" />
+		</div>
+		<h2>Gun:
+			<select id="gun_select">
+				<option value="placeholder" disabled>------------Assault Carbines------------</option>
+				<option value="ADAR 2-15">ADAR 2-15</option>
+				<option value="RFB">RFB</option>
+				<option value="TX-15 DML">TX-15 DML</option>
+				<option value='VPO-101 "Vepr-Hunter"'>VPO-101 "Vepr-Hunter"</option>
+				<option value='VPO-136 "Vepr-KM"'>VPO-136 "Vepr-KM"</option>
+				<option value="VPO-209">VPO-209</option>
+				<option value="AK-545">AK-545</option>
+				<option value="AK-545 Short">AK-545 Short</option>
+				<option value="OP-SKS">OP-SKS</option>
+				<option value="SKS">SKS</option>
+				<option value="AVT-40">AVT-40</option>
+				<option value="SVT-40">SVT-40</option>
+				<option value="placeholder" disabled>------------Assault Rifles------------</option>
+				<option value="AS VAL">AS VAL</option>
+				<option value="ASh-12">ASh-12</option>
+				<option value="Mk47 Mutant">Mk47 Mutant</option>
+				<option value="M4A1">M4A1</option>
+				<option value="SA-58">SA-58</option>
+				<option value="MDR 5.56x45">MDR 5.56x45</option>
+				<option value="MDR 7.62x51">MDR 7.62x51</option>
+				<option value="SCAR-H">SCAR-H</option>
+				<option value="SCAR-L">SCAR-L</option>
+				<option value="HK416A5">HK416A5</option>
+				<option value="G36">G36</option>
+				<option value="AK-101">AK-101</option>
+				<option value="AK-102">AK-102</option>
+				<option value="AK-103">AK-103</option>
+				<option value="AK-104">AK-104</option>
+				<option value="AK-105">AK-105</option>
+				<option value="AK-12">AK-12</option>
+				<option value="AK-74">AK-74</option>
+				<option value="AK-74M">AK-74M</option>
+				<option value="AK-74N">AK-74N</option>
+				<option value="AKM">AKM</option>
+				<option value="AKMN">AKMN</option>
+				<option value="AKMS">AKMS</option>
+				<option value="AKMSN">AKMSN</option>
+				<option value="AKS-74">AKS-74</option>
+				<option value="AKS-74N">AKS-74N</option>
+				<option value="AKS-74U">AKS-74U</option>
+				<option value="AKS-74UB">AKS-74UB</option>
+				<option value="AKS-74UN">AKS-74UN</option>
+				<option value="RD-704">RD-704</option>
+				<option value="MCX">MCX</option>
+				<option value="AUG A1">AUG A1</option>
+				<option value="AUG A3">AUG A3</option>
+				<option value="placeholder" disabled>------------Bolt-action Rifles------------</option>
+				<option value="AXMC">AXMC</option>
+				<option value="DVL-10">DVL-10</option>
+				<option value='VPO-215 "Gornostay"'>VPO-215 "Gornostay"</option>
+				<option value="Mosin">Mosin</option>
+				<option value="Mosin(Sniper)">Mosin(Sniper)</option>
+				<option value="T-5000M">T-5000M</option>
+				<option value="M700">M700</option>
+				<option value="SV-98">SV-98</option>
+				<option value="placeholder" disabled>------------Grenade Launchers------------</option>
+				<option value="FN40GL">FN40GL</option>
+				<option value="M32A1 MSGL">M32A1 MSGL</option>
+				<option value="placeholder" disabled>------------Machine Guns------------</option>
+				<option value="PKM">PKM</option>
+				<option value="PKP">PKP</option>
+				<option value="RPK-16">RPK-16</option>
+				<option value="placeholder" disabled>------------Marksman Rifles------------</option>
+				<option value="G28">G28</option>
+				<option value="SR-25">SR-25</option>
+				<option value="RSASS">RSASS</option>
+				<option value="SVDS">SVDS</option>
+				<option value="Mk-18 .338LM">Mk-18 .338LM</option>
+				<option value="M1A">M1A</option>
+				<option value="VSS">VSS</option>
+				<option value="placeholder" disabled>------------Pistols------------</option>
+				<option value="APB">APB</option>
+				<option value="APS">APS</option>
+				<option value="APS">M9A3</option>
+				<option value="CR 200DS">CR 200DS</option>
+				<option value="CR 50DS">CR 50DS</option>
+				<option value="M1911A1">M1911A1</option>
+				<option value="M45A1">M45A1</option>
+				<option value="Five-seveN 5-7">Five-seveN</option>
+				<option value="Glock 17">Glock 17</option>
+				<option value="Glock 18C">Glock 18C</option>
+				<option value="Glock 19X">Glock 19X</option>
+				<option value="USP.45">USP.45</option>
+				<option value="PL-15">PL-15</option>
+				<option value="PM(t)">PM(t)</option>
+				<option value="PM">PM</option>
+				<option value="PB">PB</option>
+				<option value="RSh-12">RSh-12</option>
+				<option value="P226R">P226R</option>
+				<option value="SR-1MP">SR-1MP</option>
+				<option value="TT">TT</option>
+				<option value='MP-443 "Grach"'>MP-443 "Grach"</option>
+				<option value="placeholder" disabled>------------SMGs------------</option>
+				<option value="MP9">MP9</option>
+				<option value="MP9-N">MP9-N</option>
+				<option value="P90">P90</option>
+				<option value="MP5">MP5</option>
+				<option value="MP5K-N">MP5K-N</option>
+				<option value="MP7A1">MP7A1</option>
+				<option value="MP7A2">MP7A2</option>
+				<option value="UMP 45">UMP 45</option>
+				<option value='PP-19-01 "Vityaz"'>PP-19-01 "Vityaz"</option>
+				<option value='PP-9 "Klin"'>PP-9 "Klin"</option>
+				<option value='PP-91 "Kedr"'>PP-91 "Kedr"</option>
+				<option value='PP-91-01 "Kedr-B"'>PP-91-01 "Kedr-B"</option>
+				<option value="PPSh-41">PPSh-41</option>
+				<option value="MPX">MPX</option>
+				<option value='SR-2M "Veresk"'>SR-2M "Veresk"</option>
+				<option value="Saiga-9">Saiga-9</option>
+				<option value="STM-9">STM-9</option>
+				<option value="Vector .45">Vector .45</option>
+				<option value="Vector 9x19">Vector 9x19</option>
+				<option value="placeholder" disabled>------------Shotguns------------</option>
+				<option value="M3 Super 90">M3 Super 90</option>
+				<option value="MP-133">MP-133</option>
+				<option value="MP-153">MP-153</option>
+				<option value="MP-155">MP-155</option>
+				<option value="MP-18">MP-18</option>
+				<option value="MP-43 Sawed-off">MP-43 Sawed-off</option>
+				<option value="MP-43-1C">MP-43-1C</option>
+				<option value="MTs-255-12">MTs-255-12</option>
+				<option value="M590A1">M590A1</option>
+				<option value="M870">M870</option>
+				<option value="Saiga-12ga">Saiga-12ga</option>
+				<option value="KS-23M">KS-23M</option>
+				<option value="TOZ-106">TOZ-106</option>
+			</select>
+		</h2>
+		
+		<table id="non_moddable">
+			<tr>
+				<td><strong>Caliber</strong></td>
+				<td><input type="text" name="caliber" readonly /></td>
+				<td><strong>Types of fire</strong></td>
+				<td><input type="text" name="types_of_fire" readonly /></td>
+			</tr>
+			<tr>
+				<td><strong>Fire Rate</strong></td>
+				<td><input type="text" name="fire_rate" readonly /></td>
+				<td><strong>Effective Distance</strong></td>
+				<td><input type="text" name="effective_distance" readonly /></td>
+			</tr>
+		</table>
+		<br>
+		<table id="moddable">
+			<tr>
+				<td><strong>Weight</strong></td>
+				<td><input type="text" name="weight" placeholder="kg" /></td>
+				<td><strong>Ergonomics</strong></td>
+				<td><input type="text" name="ergonomics" /></td>
+			</tr>
+			<tr>
+				<td><strong>Accuracy</strong></td>
+				<td><input type="text" name="accuracy" placeholder="MOA" /></td>
+				<td><strong>Vertical Recoil</strong></td>
+				<td><input type="text" name="vertical_recoil" /></td>
+			</tr>
+			<tr>
+				<td><strong>Muzzle Velocity</strong></td>
+				<td><input type="text" name="muzzle_velocity" placeholder="m/s" /></td>
+				<td><strong>Horizontal Recoil</strong></td>
+				<td><input type="text" name="horizontal_recoil" /></td>
+			</tr>
+			<tr>
+				<td><strong>Sighting Range</strong></td>
+				<td><input type="text" name="sighting_range" placeholder="m" /></td>
+				<td><strong>Magazine Size</strong></td>
+				<td><input type="text" name="magazine_size" placeholder="Without Magazine" /></td>
+			</tr>
+			<tr>
+				<td><strong>Price(RUB)</strong></td>
+				<td><input type="text" name="price" placeholder="₽" /></td>
+				<td><input type="checkbox" name="flea_dependant" value="flea_dependant">Flea Market Dependant</td>
+			</tr>
+		</table>
+		<textarea id="description"></textarea><br>
+		<input type="hidden" name="writer" value="">
+		<input type="submit" />
+	</form>
+</body>
+</html>
