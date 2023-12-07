@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>_Create</title>
+	<style type="text/css">
+		body {
+			background-color: #eeeeee;
+		}
+		img {
+			width: 600px;
+		}
+		textarea {
+			padding: 10px;
+			width: 600px;
+			height: 500px;
+			max-width: 100%;
+		}
+	</style>
+	<script type="text/javascript">
+		function previewImage(event) {
+			const imageFiles = event.target.files;
+			if (imageFiles.length > 0) {
+				const imageSrc = URL.createObjectURL(imageFiles[0]);
+
+				image_preview = document.getElementById("image_preview");
+				image_preview.src = imageSrc;
+			}
+		}/*
+		function getGunData() {
+			$.ajax({
+				url:
+				async : true,
+
+
+				success : function(data) {
+
+				}
+				error : function(req, status, error) {
+
+				}
+			})
+		}*/
+
+	</script>
+</head>
+<body>
+	<h1>Create custom modding</h1>
+	<form method="post">
+		Title: <input type="text" name="title">
+		<div class="image-preview-container">
+			<div class="preview">
+				<img id="image_preview" src="default.png">
+			</div>
+			<label for="image_upload">Modding preview:</label>
+			<input type="file" name="image" accept="image/png, image/jpeg" onchange="previewImage(event);" />
+		</div>
+		<h2>Gun:
+			<select id="gun_select" name="gun_name" onchange="">
+				<option value="placeholder" disabled>------------Assault Carbines------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Assault Carbines") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Assault Rifles------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Assault Rifles") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Bolt-action Rifles------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Bolt-action Rifles") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Grenade Launchers------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Grenade Launchers") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Machine Guns------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Machine Guns") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Marksman Rifles------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Marksman Rifles") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Pistols------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Pistols") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------SMGs------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "SMGs") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Shotguns------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Shotguns") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+
+			</select>
+		</h2>
+		
+		<table id="non_moddable">
+			<tr>
+				<td><strong>Caliber</strong></td>
+				<td><input type="text" name="caliber" readonly /></td>
+				<td><strong>Types of fire</strong></td>
+				<td><input type="text" name="types_of_fire" readonly /></td>
+			</tr>
+			<tr>
+				<td><strong>Fire Rate</strong></td>
+				<td><input type="text" name="fire_rate" readonly /></td>
+				<td><strong>Effective Distance</strong></td>
+				<td><input type="text" name="effective_distance" readonly /></td>
+			</tr>
+		</table>
+		<br>
+		<table id="moddable">
+			<tr>
+				<td><strong>Weight</strong></td>
+				<td><input type="text" name="weight" placeholder="kg" /></td>
+				<td><strong>Ergonomics</strong></td>
+				<td><input type="text" name="ergonomics" /></td>
+			</tr>
+			<tr>
+				<td><strong>Accuracy</strong></td>
+				<td><input type="text" name="accuracy" placeholder="MOA" /></td>
+				<td><strong>Vertical Recoil</strong></td>
+				<td><input type="text" name="vertical_recoil" /></td>
+			</tr>
+			<tr>
+				<td><strong>Muzzle Velocity</strong></td>
+				<td><input type="text" name="muzzle_velocity" placeholder="m/s" /></td>
+				<td><strong>Horizontal Recoil</strong></td>
+				<td><input type="text" name="horizontal_recoil" /></td>
+			</tr>
+			<tr>
+				<td><strong>Sighting Range</strong></td>
+				<td><input type="text" name="sighting_range" placeholder="m" /></td>
+				<td><strong>Magazine Size</strong></td>
+				<td><input type="text" name="magazine_size" placeholder="Without Magazine" /></td>
+			</tr>
+			<tr>
+				<td><strong>Price(RUB)</strong></td>
+				<td><input type="text" name="price" placeholder="₽" /></td>
+				<td><input type="hidden" name="flea_dependant" value="no">
+					<!-- 체크박스가 없을 시, 기본값 "no" -->
+					<input type="checkbox" name="flea_dependant" value="yes">Flea Market Dependant</td>
+			</tr>
+		</table>
+		<textarea id="description"></textarea><br>
+		<input type="submit" />
+	</form>
+</body>
+</html>
