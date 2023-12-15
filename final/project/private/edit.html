@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>_Edit</title>
+	<style type="text/css">
+		body {
+			background-color: #eeeeee;
+		}
+		img {
+			width: 600px;
+		}
+		textarea {
+			padding: 10px;
+			width: 600px;
+			height: 500px;
+			max-width: 100%;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			var xhttp = new XMLHttpRequest;
+			var url = location.href;
+			var modid = url.slice(28);
+			console.log("modid = "+modid);
+
+
+			xhttp.onreadystatechange = function() {
+				if(xhttp.readyState == 4 && xhttp.status == 200) {
+					let result = JSON.parse(xhttp.responseText);
+					console.log(result);
+
+					document.getElementById("title").value = result[0].title;
+
+					console.log(result[0].image.data.length);
+					if(result[0].image.data.length != 0){
+						//document.getElementById("image_preview")
+						//document.getElementById("image").value = result[0].image;
+					}
+
+					document.getElementById("gun_select").value = result[0].gun_name;
+					document.getElementById("weight").value = result[0].weight;
+					document.getElementById("ergonomics").value = result[0].ergonomics;
+
+					document.getElementById("accuracy").value = result[0].accuracy;
+					document.getElementById("vertical_recoil").value = result[0].vertical_recoil;
+					document.getElementById("muzzle_velocity").value = result[0].muzzle_velocity;
+					document.getElementById("horizontal_recoil").value = result[0].horizontal_recoil;
+					document.getElementById("sighting_range").value = result[0].sighting_range;
+					document.getElementById("magazine_size").value = result[0].magazine_size;
+					document.getElementById("price").value = result[0].price;
+
+					if(result[0].flea_market == "yes")
+						document.getElementById("flea_dependant").checked = true;
+
+					document.getElementById("description").value = result[0].description;
+
+					getGunData();
+				}
+			}
+			xhttp.open("POST","/moddata", false);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("modid="+modid);
+		}
+		function previewImage(event) {
+			const imageFiles = event.target.files;
+			if (imageFiles.length > 0) {
+				const imageSrc = URL.createObjectURL(imageFiles[0]);
+				console.log(imageSrc);
+
+				image_preview = document.getElementById("image_preview");
+				image_preview.src = imageSrc;
+
+				document.getElementById("imagesrc").value = imageSrc;
+
+			}
+		}
+		function getGunData() {
+			var xhttp = new XMLHttpRequest;
+			var gun_selected = document.getElementById("gun_select").value;
+
+			var caliber = document.getElementById("caliber");
+			var types_of_fire = document.getElementById("types_of_fire");
+			var fire_rate = document.getElementById("fire_rate");
+			var effective_distance = document.getElementById("effective_distance");
+
+			xhttp.onreadystatechange = function() {
+				if(xhttp.readyState == 4 && xhttp.status == 200) {
+					let result = JSON.parse(xhttp.responseText);
+
+					console.log(result);
+
+					caliber.value = result[0].caliber;
+					types_of_fire.value = result[0].types_of_fire;
+					fire_rate.value = result[0].fire_rate;
+					effective_distance.value = result[0].effective_distance;
+				}
+			}
+			xhttp.open("POST","/gundata");
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("gun_name="+gun_selected);
+		}
+	</script>
+</head>
+<body>
+	<h1>Create custom modding</h1>
+	<form id="mod_form" method="post">
+		Title: <input type="text" id="title" name="title">
+		<div class="image-preview-container">
+			<div class="preview">
+				<img id="image_preview" src="/default.png">
+			</div>
+			<label>Modding preview:</label>
+			<input type="file" id="image" name="image" accept="image/png, image/jpeg" onchange="previewImage(event);" />
+			<input type="hidden" id="imagesrc" name="imagesrc" />
+		</div>
+		<h2>Gun:
+			<select id="gun_select" name="gun_name" onchange="getGunData()">
+				<option value="placeholder" disabled>------------Assault Carbines------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Assault Carbines") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Assault Rifles------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Assault Rifles") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Bolt-action Rifles------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Bolt-action Rifles") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Grenade Launchers------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Grenade Launchers") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Machine Guns------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Machine Guns") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Marksman Rifles------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Marksman Rifles") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Pistols------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Pistols") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------SMGs------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "SMGs") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+				<option value="placeholder" disabled>------------Shotguns------------</option>
+				<% data.forEach(function (item, index) {
+				if(item.type == "Shotguns") { %>
+					<option value="<%= item.name %>"> <%= item.name %> </option>
+				<% }}); %>
+
+			</select>
+		</h2>
+		
+		<table id="non_moddable">
+			<tr>
+				<td><strong>Caliber</strong></td>
+				<td><input type="text" id="caliber" name="caliber" readonly /></td>
+				<td><strong>Types of fire</strong></td>
+				<td><input type="text" id="types_of_fire" name="types_of_fire" readonly /></td>
+			</tr>
+			<tr>
+				<td><strong>Fire Rate</strong></td>
+				<td><input type="text" id="fire_rate" name="fire_rate" readonly /></td>
+				<td><strong>Effective Distance</strong></td>
+				<td><input type="text" id="effective_distance" name="effective_distance" readonly /></td>
+			</tr>
+		</table>
+		<br>
+		<table id="moddable">
+			<tr>
+				<td><strong>Weight</strong></td>
+				<td><input type="text" id="weight" name="weight" placeholder="kg" /></td>
+				<td><strong>Ergonomics</strong></td>
+				<td><input type="text" id="ergonomics" name="ergonomics" /></td>
+			</tr>
+			<tr>
+				<td><strong>Accuracy</strong></td>
+				<td><input type="text" id="accuracy" name="accuracy" placeholder="MOA" /></td>
+				<td><strong>Vertical Recoil</strong></td>
+				<td><input type="text" id="vertical_recoil" name="vertical_recoil" /></td>
+			</tr>
+			<tr>
+				<td><strong>Muzzle Velocity</strong></td>
+				<td><input type="text" id="muzzle_velocity" name="muzzle_velocity" placeholder="m/s" /></td>
+				<td><strong>Horizontal Recoil</strong></td>
+				<td><input type="text" id="horizontal_recoil" name="horizontal_recoil" /></td>
+			</tr>
+			<tr>
+				<td><strong>Sighting Range</strong></td>
+				<td><input type="text" id="sighting_range" name="sighting_range" placeholder="m" /></td>
+				<td><strong>Magazine Size</strong></td>
+				<td><input type="text" id="magazine_size" name="magazine_size" placeholder="Without Magazine" /></td>
+			</tr>
+			<tr>
+				<td><strong>Price(RUB)</strong></td>
+				<td><input type="text" id="price" name="price" placeholder="₽" /></td>
+				<td>
+					<input type="checkbox" id="flea_dependant" name="flea_dependant" value='yes'>Flea Market Dependant
+					<input type="hidden" name="flea_dependant" value='no'>
+					<!-- 체크박스가 없을 시, 기본값 "no" -->
+				</td>
+			</tr>
+		</table>
+		<textarea id="description" form="mod_form"></textarea><br>
+		<input type="submit" />
+	</form>
+</body>
+</html>
