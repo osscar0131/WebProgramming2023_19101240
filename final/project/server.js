@@ -172,7 +172,6 @@ app.post('/insert', function (request, response) {
 			console.log(data);
 			return response.redirect('/');
 		});
-	response.end();
 });
 
 app.get('/delete/:id', function (request, response) {
