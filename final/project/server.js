@@ -185,8 +185,7 @@ app.get('/delete/:id', function (request, response) {
 		}
 		connection.query('DELETE FROM mods WHERE modid=?', [request.params.id], function () {
 			console.log('Delete successful.');
-			response.redirect('/');
-			response.end();
+			return response.redirect('/');
 		});
 	});
 });
