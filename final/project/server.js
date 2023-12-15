@@ -47,7 +47,7 @@ app.get('/', function(request, response) { //기본 디렉토리. 첫 로그인�
 				data : results
 			});
 		}
-		response.send(page);
+		return response.send(page);
 		response.end();
 	});
 });
